@@ -1,0 +1,6 @@
+scp -P 4242 level02@$SNOWCRASH_IP:~/level02.pcap $SNOWCRASH_DIR
+analyze pcap file with wireshark
+on packet number 43 there is "Password" in data part
+then all the following packets contains one byte of the password each
+except some unprintable char (7f -> backspace, 0d -> carriage return, 0a -> line return, CRLF, 0d0a = windows enter)
+so the password is: ft_waNDReL0L
