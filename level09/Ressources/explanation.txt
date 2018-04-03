@@ -1,0 +1,5 @@
+binary level09 encode first argument in a certain way (see py script)
+and we have supposed that the token file is the result
+	of a string that have been passed to that binary
+then we use our script to reverse the token
+then login as flag09 with the discovered string
