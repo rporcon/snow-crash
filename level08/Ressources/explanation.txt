@@ -1,0 +1,14 @@
+The executable expect an argument
+ltrace on the binary give us:
+	strstr("token", "token") = "token"
+	printf("You may not access '%s'\n", "token");
+Lets try another filename:
+	strstr("toto", "token") = NULL
+	open("toto", 0, 014435162522) = -1
+When the argument doesn't contain the keyword "token", the binary try to open the file
+
+We can make a symbolic link on token:
+	ln -s $HOME/token /tmp/nekot
+	./level08 /tmp/nekot
+	quif5eloekouj29ke0vouxean
+GGWP, log as flag08 and getflag
