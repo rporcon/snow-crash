@@ -1,0 +1,6 @@
+level 10 binary use access to verify permission of the file given as argument
+if we have permission then the file is open and sent on 127.0.0.1:6969
+(to listen to the program, we use: netcat -k -l 6969)
+there is a token file without permission that we need to read
+since there is a huge warning in the access man that said to not use it because of race condition
+we just have to exploit that race condition (see level10.sh)
