@@ -1,0 +1,24 @@
+After some research, we didn't found anything exploitable. We decided to reverse /bin/getflag
+scp -P 4242 level14@192.168.47.133:/bin/getflag ~/Downloads
+With cutter (radare2 GUI), we reversed the binary.
+Jump to main and follow the program flow, early on there is some UID checks: 
+	| |||||||   0x08048ba0           cmp eax, 0xbc4 ; 3012
+	| ========< 0x08048ba5           jb 0x8048d7f
+	| |||||||   0x08048bab           cmp eax, 0xbc5 ; 3013
+	| ========< 0x08048bb0           je 0x8048dc4
+	| |||||||   0x08048bb6           cmp eax, 0xbc6 ; 3014
+	| ========< 0x08048bbb           je 0x8048de5
+
+The JE instruction jump to ft_des, and print the result
+
+Let's try to jump directly to 0x8048de5 with gdb:
+gdb /bin/getflag
+
+(gdb) b main
+(gdb) jump *0x8048de5
+Continuing at 0x8048de5.
+7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+*** stack smashing detected ***: /bin/getflag terminated
+
+su flag14
+/bin/getflag
