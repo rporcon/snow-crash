@@ -1,0 +1,6 @@
+we can see in the binary level13 file by inspecting with ltrace that a getuid() is performed and 4242 is expected
+we have to inject our own shared library (see level13.c) to override the getuid():
+	gcc -shared -fPIC level13.c -o level13.so
+but that's not enough because to inject it the dynamic library must also have the suid set (since the binary has  setuid set)
+so to solve that we need to use a binary without setuid set to execute level13 binary:
+	LD_PRELOAD=/tmp/level13.so ltrace ~/level13
